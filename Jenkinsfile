@@ -40,11 +40,11 @@ pipeline {
                 }
             }
             steps {
-                owasp_check()
+                owaspScan()
             }
             post {
                 success {
-                    publish_owasp_reports()
+                    owaspPublish()
                 }
             }
         }
@@ -56,7 +56,7 @@ pipeline {
                 }
             }
             steps {
-                test_docker_compose('django-cms')
+                testDockerCompose 'django-cms'
             }
         }
         stage('Deploy') {
