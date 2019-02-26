@@ -12,6 +12,7 @@ pipeline {
     }
     parameters {
         // Parameters Needed for Share Libraries
+        string(name: 'project_name', defaultValue: 'django-cms', description: 'What is this project called?')
         string(name: 'slack_channel', defaultValue: '#devops-testing', description: 'What channel should I send notifications to?')
         string(name: 'notification_email', defaultValue: 'admin@jenkins.local', description: 'What email address should I send notifications to?')
         // Parameters Needed for defining custom Docker Agent image
@@ -56,7 +57,7 @@ pipeline {
                 }
             }
             steps {
-                testDockerCompose 'django-cms'
+                testDockerCompose "${project_name}"
             }
         }
         stage('Deploy') {
