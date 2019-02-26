@@ -56,20 +56,7 @@ pipeline {
                 }
             }
             steps {
-                sh(script: """
-                    cleanup () {
-                    docker-compose -p django-cms kill
-                    docker-compose -p django-cms rm -f --all
-                    }
-                    trap 'cleanup ; printf "Tests Failed For Unexpected Reasons\\n"'\\
-                    HUP INT QUIT PIPE TERM
-                    docker-compose -p django-cms build && docker-compose -p django-cms up -d
-                    if [ \$? -ne 0 ] ; then
-                    printf "Docker Compose Failed\\n"
-                    exit 1
-                    else
-                    printf "Docker Compose Loaded Successfully\\n"
-                    fi""")
+                test_docker_compose('django-cms')
             }
         }
         stage('Deploy') {
