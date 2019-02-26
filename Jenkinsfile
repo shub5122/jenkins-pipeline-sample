@@ -15,8 +15,6 @@ pipeline {
         string(name: 'project_name', defaultValue: 'django-cms', description: 'What is this project called?')
         string(name: 'slack_channel', defaultValue: '#devops-testing', description: 'What channel should I send notifications to?')
         string(name: 'notification_email', defaultValue: 'admin@jenkins.local', description: 'What email address should I send notifications to?')
-        // Parameters Needed for defining custom Docker Agent image
-        string(name: 'docker_agent_image', defaultValue: 'slopresto/jenkins-docker-agent:latest', description: 'What is the docker agent image that I should use?')
     }
     stages {
         stage('Start Notifications') {
@@ -36,7 +34,7 @@ pipeline {
         stage("Vulnerability Check") {
             agent {
                 docker { 
-                    image "${docker_agent_image}"
+                    image 'slopresto/jenkins-docker-agent:latest'
                     args '-v /var/run/docker.sock:/var/run/docker.sock -u jenkins'
                 }
             }
@@ -52,7 +50,7 @@ pipeline {
         stage('Local Build Check') { 
             agent {
                 docker { 
-                    image "${docker_agent_image}"
+                    image 'slopresto/jenkins-docker-agent:latest'
                     args '-v /var/run/docker.sock:/var/run/docker.sock -u jenkins'
                 }
             }
