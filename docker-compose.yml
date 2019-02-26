@@ -1,0 +1,9 @@
+version: '3'
+services:
+  django-cms:
+    build: .
+    ports:
+      - "8001:8000"
+    env_file:
+      - django-cms.env
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
