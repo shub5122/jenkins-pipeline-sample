@@ -18,7 +18,7 @@ pipeline {
     }
     stages {
         stage('Start Notifications') {
-            agent { label "fargate-default" }
+            agent { label 'docker-agent' }
             steps {
                 // send build started notifications
                 sendNotifications 'STARTED'
