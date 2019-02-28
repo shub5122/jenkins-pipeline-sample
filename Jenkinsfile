@@ -18,14 +18,14 @@ pipeline {
     }
     stages {
         stage('Start Notifications') {
-            agent { dockerfile true }
+            agent { label 'fargate-default' }
             steps {
                 // send build started notifications
                 sendNotifications 'STARTED'
             }
         }
         stage('Unit Test') {
-            agent { dockerfile true }
+            agent { label 'fargate-default' }
             steps {
                 sh 'python --version'
                 sh 'cd /django-web;python manage.py test'
