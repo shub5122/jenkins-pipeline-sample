@@ -18,14 +18,14 @@ pipeline {
     }
     stages {
         stage('Start Notifications') {
-            agent { label 'fargate-default' }
+            agent { "fargate-default" }
             steps {
                 // send build started notifications
                 sendNotifications 'STARTED'
             }
         }
         stage('Unit Test') {
-            agent { label "fargate-default" }
+            agent { "fargate-default" }
             steps {
                 sh 'python --version'
                 sh 'cd /django-web;python manage.py test'
