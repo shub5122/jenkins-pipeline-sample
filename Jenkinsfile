@@ -25,7 +25,7 @@ pipeline {
             }
         }
         stage('Unit Test') {
-            agent { label 'fargate-default' }
+            agent { label "fargate-default" }
             steps {
                 sh 'python --version'
                 sh 'cd /django-web;python manage.py test'
