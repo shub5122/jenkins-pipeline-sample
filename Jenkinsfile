@@ -25,7 +25,7 @@ pipeline {
             }
         }
         stage('Unit Test') {
-            agent { dockerfile }
+            agent { dockerfile true }
             steps {
                 sh 'python --version'
                 sh 'cd /django-web;python manage.py test'
