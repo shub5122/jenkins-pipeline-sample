@@ -19,8 +19,8 @@ pipeline {
     stages {
         stage('Start Notifications') {
             agent { 
-                cloud 'ecs'
-                label 'docker-agent' }
+                label 'docker-agent' 
+            }
             steps {
                 // send build started notifications
                 sendNotifications 'STARTED'
